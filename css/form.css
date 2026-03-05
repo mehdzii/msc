@@ -1,0 +1,700 @@
+/* ==========================================================================
+   MSC INPT — Registration Form Stylesheet
+   
+   Minimalist, editorial design matching the main MSC website.
+   Uses the same blue palette (#1E88E5) and Inter font family.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. BASE & RESET
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-color: #ffffff;
+    --text-color: #1e293b;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(255, 255, 255, 0.8);
+    --accent-primary: #1E88E5;
+    --accent-secondary: #42A5F5;
+    --accent-rgb: 30, 136, 229;
+    --shadow-color: rgba(0, 0, 0, 0.06);
+    --glass-blur: blur(16px);
+    --card-shadow: 0 8px 32px var(--shadow-color);
+}
+
+/* ==========================================================================
+   0. PRELOADER
+   ========================================================================== */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease, visibility 0.6s;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+    width: 240px;
+}
+
+.loader-logo {
+    width: 80px;
+    margin-bottom: 2rem;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.loader-bar {
+    width: 100%;
+    height: 2px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loader-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #1E88E5, #42A5F5);
+    animation: load 2.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes load {
+    0% {
+        width: 0;
+        left: 0;
+    }
+
+    50% {
+        width: 100%;
+        left: 0;
+    }
+
+    100% {
+        width: 100%;
+        left: 0;
+    }
+}
+
+body {
+    background: radial-gradient(circle at top right, rgba(var(--accent-rgb), 0.05), transparent),
+        radial-gradient(circle at bottom left, rgba(var(--accent-rgb), 0.05), transparent),
+        #fcfdfe;
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* ==========================================================================
+   2. HEADER
+   Clean white header with club logo, title, and a back-link to the main site.
+   The title uses Playfair Display italic for the "MSC" accent.
+   ========================================================================== */
+header {
+    background: transparent;
+    padding: 1rem 0 3rem;
+    text-align: center;
+}
+
+.header-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 1rem;
+}
+
+/* Back-to-site navigation link */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+}
+
+.back-link:hover {
+    color: var(--accent-primary);
+    background: rgba(var(--accent-rgb), 0.05);
+    transform: translateX(-5px);
+}
+
+.back-link i {
+    font-size: 1.1rem;
+}
+
+/* Club logo in the header */
+.form-logo {
+    height: 60px;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+/* Main title: "Join MSC" with italic accent */
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+}
+
+header h1 em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #1E88E5;
+    /* MSC Club Blue accent */
+}
+
+/* Subtitle under the heading */
+header p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.5;
+}
+
+
+/* ==========================================================================
+   3. FORM CONTAINER
+   White card with subtle shadow, centered on the page.
+   Max width of 720px for readability.
+   ========================================================================== */
+main {
+    flex: 1;
+    /* Pushes footer down */
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    width: 100%;
+    max-width: 720px;
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1.5px solid rgba(var(--accent-rgb), 0.1);
+    border-radius: 2rem;
+    padding: 3rem;
+    box-shadow: var(--card-shadow);
+    animation: formAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes formAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================================================
+   4. FIELDSETS & LEGENDS
+   Fieldsets group related fields. Legends act as section titles
+   with an icon and a bottom border divider.
+   ========================================================================== */
+fieldset {
+    border: none;
+    margin-bottom: 2rem;
+    padding: 0;
+}
+
+legend {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(var(--accent-rgb), 0.1);
+    width: 100%;
+}
+
+/* Icon next to the legend text */
+legend i {
+    color: #1E88E5;
+    font-size: 1.1rem;
+}
+
+
+/* ==========================================================================
+   5. LABELS & FORM FIELDS
+   Each label wraps its text and its input. Two-column layout via .form-row
+   for side-by-side fields on larger screens.
+   ========================================================================== */
+label {
+    display: block;
+    margin-bottom: 1.25rem;
+}
+
+/* The small label text above each input */
+.label-text {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+
+/* Text inputs, selects, and textareas share a common style */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: #1e293b;
+    background: #ffffff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+/* Focus state: blue border with soft glow */
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--accent-primary);
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.1);
+}
+
+/* Placeholder text styling */
+input::placeholder,
+textarea::placeholder {
+    color: #cbd5e1;
+}
+
+/* Textarea specific: prevent horizontal resize */
+textarea {
+    resize: vertical;
+}
+
+
+/* ==========================================================================
+   6. FORM ROW (Two-column layout)
+   Places two fields side by side on screens wider than mobile.
+   ========================================================================== */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+
+/* ==========================================================================
+   7. RADIO & CHECKBOX GROUPS
+   Horizontal groups for radio buttons and checkboxes, styled as
+   clickable pill-shaped options.
+   ========================================================================== */
+.radio-group,
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+/* Individual radio/checkbox option wrapper */
+.radio-option,
+.checkbox-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.5rem 1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 2rem;
+    /* Pill shape */
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 0;
+}
+
+.radio-option:hover,
+.checkbox-option:hover {
+    border-color: #1E88E5;
+    color: #1E88E5;
+}
+
+/* Auto-width for radio/checkbox inputs (override the full-width default) */
+input[type="radio"],
+input[type="checkbox"] {
+    width: auto;
+    accent-color: #1E88E5;
+    /* Blue check/radio color */
+}
+
+
+/* ==========================================================================
+   8. FILE UPLOAD AREA
+   Dashed border drop zone with cloud icon. The actual file input
+   is invisible and layered on top for click handling.
+   ========================================================================== */
+.file-label {
+    margin-bottom: 1rem;
+}
+
+.file-upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    border: 2px dashed #e2e8f0;
+    border-radius: 0.75rem;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+}
+
+.file-upload-area:hover {
+    border-color: #1E88E5;
+    background: rgba(30, 136, 229, 0.03);
+}
+
+.file-upload-area i {
+    font-size: 1.5rem;
+    color: #1E88E5;
+}
+
+/* Hide the default file input but keep it clickable */
+.file-upload-area input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+/* ==========================================================================
+   9. PHOTO PREVIEW
+   Circular preview thumbnail for uploaded profile pictures.
+   ========================================================================== */
+#photoPreview {
+    display: none;
+    /* Hidden until JS shows it */
+    margin-top: 1rem;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #e2e8f0;
+}
+
+
+/* ==========================================================================
+   10. RANGE INPUT
+   Custom accent color matching the club blue.
+   ========================================================================== */
+input[type="range"] {
+    accent-color: #1E88E5;
+    padding: 0;
+    border: none;
+}
+
+input[type="range"]:focus {
+    box-shadow: none;
+}
+
+
+/* ==========================================================================
+   11. TERMS SECTION
+   Terms checkbox with a subtle background highlight.
+   ========================================================================== */
+.terms-section {
+    padding: 1rem 1.25rem;
+    background: #f8fafc;
+    border-radius: 0.5rem;
+    border: 1px solid #f1f5f9;
+    margin-bottom: 1.5rem;
+}
+
+.terms-check {
+    margin-bottom: 0;
+}
+
+.terms-section a {
+    color: #1E88E5;
+    text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   12. BUTTONS
+   Primary submit button with gradient blue, secondary reset button
+   with ghost outline style.
+   ========================================================================== */
+.button-group {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Shared button base */
+.btn-submit,
+.btn-reset {
+    padding: 0.85rem 2rem;
+    border: none;
+    border-radius: 3rem;
+    /* Pill shape to match main site */
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Primary submit: gradient blue with glow */
+.btn-submit {
+    background: linear-gradient(135deg, #1E88E5, #42A5F5);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(30, 136, 229, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(30, 136, 229, 0.4);
+}
+
+.btn-submit i {
+    transition: transform 0.3s;
+}
+
+.btn-submit:hover i {
+    transform: translateX(4px);
+}
+
+/* Secondary reset: ghost outline button */
+.btn-reset {
+    background: transparent;
+    color: #94a3b8;
+    border: 1.5px solid #e2e8f0;
+}
+
+.btn-reset:hover {
+    border-color: #cbd5e1;
+    color: #64748b;
+}
+
+
+/* ==========================================================================
+   13. SUCCESS MESSAGE (output element)
+   Green highlight bar shown after successful form submission.
+   ========================================================================== */
+output {
+    display: block;
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: #ecfdf5;
+    border-left: 4px solid #10b981;
+    color: #065f46;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+}
+
+
+/* ==========================================================================
+   16. TERMS MODAL
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(8px);
+    display: none;
+    /* Controlled by JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    max-width: 500px;
+    width: 100%;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: #ffffff;
+    padding: 2.5rem;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0;
+}
+
+.modal-header h2 em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--accent-primary);
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--accent-primary);
+}
+
+.modal-body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.modal-body ul {
+    padding-left: 1.25rem;
+    margin-top: 1rem;
+}
+
+.modal-body li {
+    margin-bottom: 0.75rem;
+}
+
+.modal-footer {
+    margin-top: 2rem;
+}
+
+/* Responsive modal */
+@media (max-width: 640px) {
+    .modal-content {
+        padding: 1.5rem;
+    }
+}
+
+/* ==========================================================================
+   17. FOOTER
+   ========================================================================== */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: #94a3b8;
+    font-size: 0.8rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+
+/* ==========================================================================
+   15. RESPONSIVE DESIGN
+   Stack two-column layouts into single column on mobile devices.
+   ========================================================================== */
+@media (max-width: 640px) {
+    header {
+        padding: 2rem 1rem 1.5rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    form {
+        padding: 1.5rem;
+    }
+
+    /* Stack side-by-side fields on small screens */
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .btn-submit,
+    .btn-reset {
+        width: 100%;
+    }
+}
