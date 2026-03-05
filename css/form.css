@@ -658,12 +658,23 @@ output {
 /* ==========================================================================
    17. FOOTER
    ========================================================================== */
-footer {
+.form-footer {
     text-align: center;
-    padding: 1.5rem;
+    padding: 3rem 1.5rem 1.5rem;
     color: #94a3b8;
+    background: transparent;
+}
+
+.designer-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--accent-primary);
+}
+
+.created-by {
     font-size: 0.8rem;
-    border-top: 1px solid #e5e7eb;
+    margin-top: 0.4rem;
 }
 
 
