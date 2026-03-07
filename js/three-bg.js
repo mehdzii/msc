@@ -127,7 +127,19 @@ function initThreeBg() {
     const particlesMesh = new THREE.Points(particlesGeo, particlesMaterial);
     scene.add(particlesMesh);
 
-    // 4. Parallax setup (Removed per user request to keep models static)
+    // 4. Scale models for mobile to save space
+    function adjustForMobile() {
+        if (window.innerWidth <= 768) {
+            shapesGroup.scale.set(0.4, 0.4, 0.4);
+            symbolsGroup.scale.set(0.5, 0.5, 0.5);
+            camera.position.z = 40; // Pull camera back so particles aren't overwhelming
+        } else {
+            shapesGroup.scale.set(1, 1, 1);
+            symbolsGroup.scale.set(1, 1, 1);
+            camera.position.z = 30;
+        }
+    }
+    adjustForMobile();
 
     // Handle Theme Change
     window.addEventListener('themeChanged', (e) => {
@@ -169,6 +181,7 @@ function initThreeBg() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        adjustForMobile();
     });
 
     // ANIMATION LOOP
